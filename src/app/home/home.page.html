@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <google-map #myGoogleMap height="80vh" width="100%"   [zoom]="zoom" [center]="center" [options]="options"
+    (mapClick)="eventHandler($event,'mapClick')" (mapDblclick)="eventHandler($event,'mapDblclick')"
+    (mapDrag)="eventHandler($event,'mapDrag')" (mapDragend)="eventHandler($event,'mapDragend')"
+    (mapRightclick)="eventHandler($event,'mapRightclick')"
+    (positionChanged)="eventHandler($event,'marker_positionChanged')"
+    (zoomChanged)="eventHandler($event,'zoomChanged')">
+
+    <map-marker #markerElem="mapMarker" *ngFor="let marker of markers" [position]="marker.position"
+      [label]="marker.label" [title]="marker.title" [options]="marker.options"
+      (mapDrag)="eventHandler($event,'mapDragMarker')" (mapDragend)="eventHandler($event,'mapDragend')">
+    </map-marker>
+
+    <map-polyline [path]="borderCoordinates"></map-polyline>
+
+  </google-map>
+
+  <div  class="bottom-section">
+    <div><button (click)="check()">בדוק</button></div>
+    <div><h6 *ngIf="currCity">{{currCity.name}}</h6></div>
+    <a href="/contact">XXXX</a> 
+  </div>
+</ion-content>
